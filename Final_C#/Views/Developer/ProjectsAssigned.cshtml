@@ -1,0 +1,59 @@
+﻿@model List<AdvancedTopic_FinalProject.Models.ViewModel.ProjectTaskViewModel>
+
+<h2>The Projects you have</h2>
+
+<table style="width:100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th>Project/Task</th>
+            <th>Priority</th>
+            <th>Hour alloted</th>
+            <th>Complete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vm in Model)
+        {
+            var proj = vm.Project;
+            <tr style="background-color: #e6f7ff;">
+                <td colspan="4" style="padding: 10px 0;">
+                    <strong>@proj.title</strong>
+                </td>
+            </tr>
+
+            foreach (var task in vm.UserTasks)
+            {
+                <tr style="background-color: #e6e6e6;">
+                    <td style="padding: 5px 0;">
+                        &nbsp;&nbsp;&rarr; @task.title
+                    </td>
+                    <td style="padding: 10px 0;">
+                        @task.Priority
+                    </td>
+                    <td style="padding: 10px 0;">
+                        @task.RequiredHours
+                        | <a class="Pbutton" asp-action="EditTask" asp-route-id="@task.Id">Edit</a> |
+                    </td>
+                    <td style="padding: 5px 0;">
+                           <form asp-action="CompletedTask" method="post">
+                            <input type="hidden" name="id" value="@task.Id" />
+                            <label>
+                                @(task.CompletedTask ? "Completed" : "Pending")
+                            </label>
+                            <input type="checkbox"  name="isCompleted" value="true"  @(task.CompletedTask ? "checked" : "") />
+                           </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+@section scripts {
+    <script>
+        $('input[type="checkbox"]').change(function () {
+            $(this).closest('form').submit();
+        });
+    </script>
+}

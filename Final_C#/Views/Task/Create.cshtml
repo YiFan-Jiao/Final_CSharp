@@ -1,0 +1,39 @@
+﻿@model AdvancedTopic_FinalProject.Models.Taask
+
+<h2>Create Task</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="title">Task Title:</label>
+        <input asp-for="title" class="form-control" />
+        <span asp-validation-for="title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RequiredHours">Required Hours:</label>
+        <input asp-for="RequiredHours" class="form-control" />
+        <span asp-validation-for="RequiredHours" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Priority" class="control-label">Priority:</label>
+        <select asp-for="Priority" class="form-control">
+            @foreach (var priorityValue in Enum.GetValues(typeof(AdvancedTopic_FinalProject.Models.Priority)))
+            {
+                <option value="@priorityValue">@priorityValue</option>
+            }
+        </select>
+        <span asp-validation-for="Priority" class="text-danger"></span>
+    </div>
+
+
+    <input type="hidden" asp-for="ProjectId" value="@ViewData["ProjectId"]" />
+
+    <div class="form-group">
+        <input type="submit" value="Create Task" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-controller="Project" asp-action="Index">Back to Task List</a>
+</div>

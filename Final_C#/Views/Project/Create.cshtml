@@ -1,0 +1,34 @@
+﻿@model AdvancedTopic_FinalProject.Models.Project;
+@{
+    ViewData["Title"] = "Project Page";
+}
+
+<div>
+    <h3>Create project</h3>
+</div>
+
+<container>
+    <row>
+        <form method="post">
+            <div class="form-group">
+                <label for="title">Project Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="@Model.title" required />
+                <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div>
+                @foreach (var user in ViewBag.Users)
+                {
+                    <input name="AreChecked" type="checkbox" value="@user.Id" /> @user.UserName
+
+                    <br />
+                }
+               
+            </div>
+                
+            
+            <div>
+                <input type="submit" value="submit" />
+            </div>
+        </form>
+    </row>
+</container>

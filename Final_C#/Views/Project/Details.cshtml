@@ -1,0 +1,37 @@
+﻿@model AdvancedTopic_FinalProject.Models.Project
+
+@{
+    ViewData["Title"] = "Project Page";
+}
+
+<div>
+    <h3>Projects'detail</h3>
+</div>
+
+<container>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+         
+                <tr>
+                <td>@Model.Id</td>
+                <td>@Model.title</td>
+                    <td>
+                    <a asp-controller="Task" asp-action="Create" asp-route-projectId="@Model.Id">Create a new task</a> |
+
+                    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                    </td>
+                </tr>
+
+            
+        </tbody>
+    </table>
+
+</container>
+

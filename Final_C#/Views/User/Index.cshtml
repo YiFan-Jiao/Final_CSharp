@@ -1,0 +1,40 @@
+﻿@model Dictionary<string, IList<string>>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h2>User List</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Roles</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var isFirstUser = true;
+        }
+        @foreach (var userRolesPair in ViewBag.UserRoles)
+        {
+            var user = userRolesPair.Key;
+            var roles = userRolesPair.Value;
+            
+            <tr>
+                <td>@user</td>
+                <td>@string.Join(", ", roles)</td>
+                @* @if (!isFirstUser)
+                { *@
+                    <td>
+                        <a asp-action="Edit" asp-route-username="@user">Edit</a> |
+                        <a asp-action="Delete" asp-route-username="@user">Delete</a>
+                    </td>
+                @* } *@
+            </tr>
+            isFirstUser = false;
+        }
+    </tbody>
+</table>

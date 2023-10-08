@@ -1,0 +1,91 @@
+﻿body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 15px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    table-layout: auto; /* Adjusts column width according to content */
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+.developer-table, .task-table {
+    width: 100%; /* make sure nested tables stretch the full width */
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.projectHead {
+    background-color: pink !important;
+}
+
+.DForP {
+    background-color: khaki !important;
+}
+
+.developer-table .DForP,
+.task-table .DForT {
+    border: 1px solid #ccc; /* Adding border only to inner cells, not the whole nested table */
+}
+
+.DForT {
+    background-color: lightskyblue !important;
+}
+
+.DTName {
+    background-color: slateblue !important;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

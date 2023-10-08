@@ -1,0 +1,108 @@
+﻿@model IPagedList<AdvancedTopic_FinalProject.Models.Project>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@{
+    ViewData["Title"] = "Project Page";
+}
+
+<link rel="stylesheet" href="~/css/yifan.css" />
+
+<div class="project-header">
+    <h3>Projects</h3>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Create a new Project</a>
+</div>
+
+<table class=" task-table DForT">
+    <tbody>
+        @foreach (var project in Model)
+        {
+            <!-- Display the headers for every project -->
+            <thead>
+                <tr>
+                    <th>Project ID</th>
+                    <th>Title</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <!-- Project details -->
+            <tr class="projectHead">
+                <td>@project.Id</td>
+                <td>@project.title</td>
+                <td>
+                    <a asp-controller="Task" asp-action="Create" asp-route-projectId="@project.Id">Create a new task</a> |
+                    <a asp-action="Details" asp-route-id="@project.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@project.Id">Delete</a>
+                </td>
+            </tr>
+            <!-- developer -->
+            <tr>
+                <td colspan="3" class="DForP">
+                    <table class="developer-table">
+                        <thead class="DForP">
+                            <tr class="DForP">
+                                <th class="DForP">Developer Name</th>
+                                <th class="DForP"><a asp-action="AddToDeveloper" asp-route-id="@project.Id">Add developer to project</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var userName in ViewBag.ProjectUserNames[project.Id])
+                            {
+                                <tr class="DForP">
+                                    <td class="DForP">@userName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+                <!-- task -->
+                <tr>
+                <td colspan="3" class="DForT">
+                    <h3>Tasks</h3>
+                    <table class="task-table" class="DForT">
+                        <thead class="DForT">
+                            <tr class="DForT">
+                                <th class="DForT">Title</th>
+                                <th class="DForT">RequiredHours</th>
+                                <th class="DForT">Priority</th>
+                                <th class="DForT">Actions</th>
+                                <td class="DForT">
+                                        <a asp-action="Index" asp-route-sortId="@project.Id" asp-route-sortBy="RequiredHours">Sort by RequiredHours</a>
+                                        <a asp-action="Index" asp-route-sortId="@project.Id" asp-route-sortBy="Priority">Sort by Priority</a>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var task in project.Tasks)
+                                {
+                                <tr class="DForT">
+                                    <td class="DForT">@task.title</td>
+                                    <td class="DForT">@task.RequiredHours</td>
+                                    <td class="DForT">@task.Priority</td>
+                                    <th class="DForT"><a asp-action="AddToTask" asp-route-id="@project.Id" asp-route-Taskid="@task.Id">Add developer to task</a> |
+                                        <a asp-controller="Task" asp-action="Delete" asp-route-id="@project.Id" asp-route-Taskid="@task.Id">Delete task</a>
+                                    </th>
+                                    </tr>
+                                <tr class="DTName">
+                                    <td class="DTName">Developer name</td>
+                                    </tr>
+                                @foreach (var userName in ViewBag.taskUserNames[task.Id])
+                                {
+                                    <tr class="DTName">
+                                        <td class="DTName">@userName</td>
+                                    </tr>
+                                }
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            
+        }
+
+        </tbody>
+    </table>
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortBy = ViewBag.SortBy, sortId= ViewBag.SortId }))
+</div>

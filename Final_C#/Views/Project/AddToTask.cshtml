@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Project Page";
+}
+
+<div>
+    <h3>Add developer to task</h3>
+</div>
+
+<container>
+    <row>
+        <form method="post">
+            <div>
+
+                <h3>
+                    Task Title:@ViewBag.TaskName.title
+                </h3>
+
+
+            </div>
+            <div>
+                @foreach (var user in @ViewBag.users)
+                {
+                    <input name="AreChecked" type="checkbox" value="@user.Id" /> @user.UserName
+
+                    <br />
+                }
+
+            </div>
+
+
+            <div>
+                <input type="submit" value="submit" asp-route-Tid="@ViewBag.TId" />
+            </div>
+        </form>
+    </row>
+</container>
+
